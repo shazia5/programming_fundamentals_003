@@ -1,105 +1,77 @@
-const Book = require("./Book");
 // eslint-disable-next-line no-unused-vars
 const catalogue = [
-    new Book("The Catcher in the Rye", "J.D. Salinger", 10),
-    new Book("Dracula", "Bram Stoker", 0),
-    new Book("Between the Assassinations", "Aravind Adiga", 9),
-    new Book("Wolf Hall", "Hilary Mantel", 33),
-    new Book("Bring Up The Bodies", "Hilary Mantel", 31),
-    new Book("A Place of Greater Safety", "Hilary Mantel", 11),
-    new Book("Giving Up the Ghost", "Hilary Mantel", 8),
-    new Book("The Assassination of Margaret Thatcher", "Hilary Mantel", 43),
-    new Book("The Yellow Wallpaper", "Charlotte Perkins Gilman", 12),
-    new Book("Conversations With Friends", "Sally Rooney", 1),
-    new Book("Normal People", "Sally Rooney", 2),
-    new Book("Everything I Never Told You", "Celeste Ng", 6),
-    new Book("The Origin of Species", "Charles Darwin", 50),
-    new Book("Why Be Happy When You Could Be Normal?", "Jeanette Winterson", 19),
-    new Book("The Blind Assassin", "Margaret Atwood", 8),
-    new Book("Great Expectations" ,"Charles Dickens", 1),
-    new Book("Oliver Twist" ,"Charles Dickens", 7),
-    new Book("A Tale of Two Cities", "Charles Dickens", 3),
-    new Book("By Night In Chile", "Robert Bolaño", 8),
-    new Book("2666", "Robert Bolaño", 17)
-];
+  {title: "The Catcher in the Rye",  author: "J.D. Salinger", quantity: 10},
+  {title:"Dracula", author: "Bram Stoker", quantity: 0},
+  {title: "Between the Assassinations", author: "Aravind Adiga", quantity: 9},
+  {title: "Wolf Hall", author: "Hilary Mantel", quantity: 33},
+  {title: "Bring Up The Bodies", author: "Hilary Mantel", quantity: 31},
+  {title: "A Place of Greater Safety", author: "Hilary Mantel", quantity: 11},
+  {title: "Giving Up the Ghost", author: "Hilary Mantel", quantity: 8},
+  {title: "The Assassination of Margaret Thatcher", author: "Hilary Mantel", quantity: 43},
+  {title: "The Yellow Wallpaper", author: "Charlotte Perkins Gilman", quantity: 12},
+  {title: "Conversations With Friends", author: "Sally Rooney", quantity: 1},
+  {title: "Normal People", author: "Sally Rooney", quantity: 2},
+  {title: "Everything I Never Told You", author: "Celeste Ng", quantity: 6},
+  {title: "2666", author: "Robert Bolaño", quantity: 17},
+  {title: "By Night In Chile", author: "Robert Bolaño", quantity: 8},
+  {title: "A Tale of Two Cities", author: "Charles Dickens", quantity: 3},
+  {title: "Oliver Twist", author: "Charles Dickens", quantity:7},
+  {title: "Great Expectations", author: "Charles Dickens", quantity:1},
+  {title: "The Blind Assassin", author: "Margaret Atwood", quantity: 8},
+  {title: "Why Be Happy When You Could Be Normal?", author: "Jeanette Winterson", quantity: 19},
+  {title: "The Origin of Species", author: "Charles Darwin", quantity: 50}
+ ];
 
 function checkBook(title) {
   if (!title) throw new Error("Please provide a title");
-  let result = false;
-  for (let i = 0; i < catalogue.length; i++) {
-   let ct = catalogue[i].title;
-   ct = ct.toLowerCase();
-   const t = title.toLowerCase();
-   if(ct.includes(t)){
-     result = true;
+  // Your code here
+  let result = false
+  let i = 0;
+  while (i < catalogue.length) {
+   //console.log(i);
+   const bookTitle = catalogue[i].title;
+   //console.log(bookTitle);
+   let bookLS = bookTitle.toLowerCase();
+   //console.log(bookLS);
+   let titleLS = title.toLowerCase();
+   if (bookLS.includes(titleLS)) {
+      result = true
    }
-  }
-  return result;
-}
-
-function countBooksByKeyword(keyword) {
+   i++;
+   }
+   return result
+ }
+ function countBooksByKeyword(keyword) {
   if (!keyword) throw new Error("Please provide a keyword");
-  let cont = 0;
-  for (let i = 0; i < catalogue.length; i++) {
-    const book = keyword.toLowerCase();
-    let cat = catalogue[i].title;
-    cat = cat.toLowerCase();
-    if (cat.includes(book)) {
-      cont++;
-    }
+  // Your code here
+  let count = 0;
+    let i = 0;
+    while (i < catalogue.length) {
+     const book = catalogue[i].title;
+     let bookLS = book.toLowerCase();
+     let keywordLS = keyword.toLowerCase();
+     if (bookLS.includes(keywordLS)) { count = count + 1;
   }
-  return cont;
-}
+  i++;
+  }
+  return count;
+ }
+ 
+ console.log(countBooksByKeyword("e"));
 
 function getBooksByAuthor(author) {
   if (!author) throw new Error("Please provide an author");
-  let count = [];
-  for (let i = 0; i < catalogue.length; i++){
-    let at = catalogue[i].author;
-    at = at.toLowerCase();
-    let a = author.toLowerCase();
-    if (at.includes(a)){
-      count.push(catalogue[i].title);
-    }
-  }
-  return count;
+  // Your code here
 }
 
 function getStockCount(title) {
   if (!title) throw new Error("Please provide a title");
-  let result = 0;
-  for (let i = 0; i < catalogue.length; i++) {
-   let ct = catalogue[i].title;
-   ct = ct.toLowerCase();
-   const t = title.toLowerCase();
-   if(ct.includes(t)){
-     result = catalogue[i].quantity;
-   }
-  }
-  return result;
+  // Your code here
 }
 
 function stockReview(title) {
   if (!title) throw new Error("Please provide a title");
-  let result = "Book not found";
-  for (let i = 0; i < catalogue.length; i++) {
-   let ct = catalogue[i].title;
-   ct = ct.toLowerCase();
-   const t = title.toLowerCase();
-   if(ct.includes(t)){
-    let quantity = catalogue[i].quantity;
-    if(quantity > 10){
-      result = "High Stock";
-    } else if (quantity <= 10 && quantity > 5){
-      result =  "Medium Stock";
-    } else if (quantity <= 5 && quantity > 0){
-      result = "Low Stock";
-    } else {
-      result =  "Not in Stock";
-    }
-   }
-  }
-  return result;
+  // Your code here
 }
 
 module.exports = {
